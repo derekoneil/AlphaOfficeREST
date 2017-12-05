@@ -40,7 +40,7 @@ push-release:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         working-dir: /pipeline/source
         ports: "8080"
-        cmd: env; node server.js
+        cmd: /usr/bin/env; export PORT=$PORT; node server.js
         repository: wcr.io/derekoneil/alpha-office-rest
 
 #delete any existing Wercker secret before creating, to accommodate secret changes
