@@ -22,9 +22,6 @@ build:
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
-    - script: 
-        name: set port env var
-        code: export PORT=8080;
     # A step that executes `npm install` command
     - npm-install
     # A step that executes `npm test` command
@@ -39,6 +36,9 @@ build:
           echo "npm version $(npm -v) running"
 push-release:
   steps:
+    - script: 
+        name: set port env var
+        code: export PORT=8080; echo $PORT;
     - internal/docker-push:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         working-dir: /pipeline/source
