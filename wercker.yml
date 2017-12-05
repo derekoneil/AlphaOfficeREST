@@ -41,6 +41,7 @@ push-release:
         working-dir: /pipeline/source
         ports: "8080"
         cmd: node server.js
+        repository: wcr.io/derekoneil/alpha-office-rest
 
 #delete any existing Wercker secret before creating, to accommodate secret changes
 inject-secret:
