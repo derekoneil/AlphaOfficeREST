@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: alpha-office-rest
+  labels:
+    commit: ${WERCKER_GIT_COMMIT}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: alpha-office-rest
+  template:
+    metadata:
+      labels:
+        app: alpha-office-rest
+        commit: ${WERCKER_GIT_COMMIT}
+    spec:
+      containers:
+      - name: alpha-office-rest-container
+        image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+        imagePullPolicy: Always
+        ports:
+        - name: alpha-office-rest-port
+          containerPort: 8080
+          protocol: TCP
+      imagePullSecrets:
+        - name: wercker
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alpha-office-rest-service
+  labels:
+    app: alpha-office-rest
+    commit: ${WERCKER_GIT_COMMIT}
+spec:
+  ports:
+  - port: 30000
+    targetPort: 8080
+  selector:
+    app: alpha-office-rest
+    commit: ${WERCKER_GIT_COMMIT}
+  type: LoadBalancer
+---
