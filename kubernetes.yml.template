@@ -20,7 +20,7 @@ spec:
         image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         imagePullPolicy: Always
         ports:
-        - name: alpha-office-rest-port
+        - name: ao-rest-port
           containerPort: 8080
           protocol: TCP
       imagePullSecrets:
