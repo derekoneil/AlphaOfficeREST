@@ -69,15 +69,14 @@ app.get('/product/:id', function(req, res) {
 app.listen(port, function() {
 	console.log('AlphaOffice listening on port ' + port);
 	http.get('twitter-feed/statictweets', res => {
-  res.setEncoding("utf8");
-  let body = "";
-  res.on("data", data => {
-    body += data;
+    res.setEncoding("utf8");
+    let body = "";
+    res.on("data", data => {
+      body += data;
+    });
+    res.on("end", () => {
+      console.log('found some tweets: ' + body);
+    });
   });
-  res.on("end", () => {
-    console.log('found some tweets: ' + body);
-    );
-  });
-});
 
 });
