@@ -22,6 +22,9 @@ build:
   # Read more about steps on our dev center:
   # http://devcenter.wercker.com/docs/steps/index.html
   steps:
+    - script: 
+        name: set port env var
+        code: export PORT=$PORT;
     # A step that executes `npm install` command
     - npm-install
     # A step that executes `npm test` command
@@ -40,7 +43,7 @@ push-release:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         working-dir: /pipeline/source
         ports: "8080"
-        cmd: export PORT=$PORT; node server.js
+        cmd: node server.js
         repository: wcr.io/derekoneil/alpha-office-rest
 
 #delete any existing Wercker secret before creating, to accommodate secret changes
