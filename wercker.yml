@@ -34,6 +34,9 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+    - script: 
+        name: set port env var
+        code: export PORT=8080; echo $PORT;
 push-release:
   steps:
     - internal/docker-push:
